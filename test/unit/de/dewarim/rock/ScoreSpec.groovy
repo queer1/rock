@@ -1,4 +1,4 @@
-package rock
+package de.dewarim.rock
 
 import de.dewarim.rock.Score
 import grails.test.mixin.TestFor
