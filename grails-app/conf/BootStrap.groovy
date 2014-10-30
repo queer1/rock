@@ -3,6 +3,7 @@ import de.dewarim.rock.Band
 import de.dewarim.rock.Person
 import de.dewarim.rock.PersonAuthority
 import de.dewarim.rock.Song
+import de.dewarim.rock.Tuning
 
 class BootStrap {
 
@@ -31,6 +32,13 @@ class BootStrap {
                 def songName = (String) line[0]
                 def bandName = (String) line[1]
                 def songYear = line[2] == null ? null : Integer.parseInt(line[2])
+
+                Tuning tuning = null;
+                if(line.length > 3){
+                    def originalTuning = (String) line[3]
+                    tuning = Tuning.findByName(originalTuning)
+                }
+
                 def band = Band.findByName(bandName)
                 if (!band) {
                     band = new
@@ -42,7 +50,7 @@ class BootStrap {
                     log.debug("Song $songName already exists. Skipping.")
                     return
                 }
-                song = new Song(name: songName, year: songYear, band: band)
+                song = new Song(name: songName, year: songYear, band: band, tuning: tuning)
                 song.save()
                 log.debug("Imported song "+song)
             }
