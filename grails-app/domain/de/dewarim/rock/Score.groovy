@@ -7,8 +7,15 @@ class Score {
     
     static belongsTo = [song:Song, person:Person]
 
-    Integer points
-    Integer ranking
+    Integer points = 0
+    Integer ranking = 0
     Date dateCreated
+
+    Integer longestStreak = 0
+    Integer precisionTimesTen = 0
+    Integer abilityTimesTen = 0
+    ScoreType type
+
+
 
 }
