@@ -49,4 +49,22 @@ class Score {
         result = 31 * result + scoreType.hashCode()
         return result
     }
+
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "id=" + id +
+                ", points=" + points +
+                ", ranking=" + ranking +
+                ", dateCreated=" + dateCreated +
+                ", longestStreak=" + longestStreak +
+                ", precisionTimesTen=" + precisionTimesTen +
+                ", abilityTimesTen=" + abilityTimesTen +
+                ", scoreType=" + scoreType +
+                ", instrumentType=" + instrumentType +
+                ", song=" + song.name +
+                ", person=" + person.username +
+                '}';
+    }
 }

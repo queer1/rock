@@ -31,4 +31,29 @@ class Song {
                 ", band=" + band +
                 '}';
     }
+
+    boolean equals(o) {
+        if (this.is(o)) return true
+        if (!(o instanceof Song)) return false
+
+        Song song = (Song) o
+
+        if (band != song.band) return false
+        if (name != song.name) return false
+        if (playedArcade != song.playedArcade) return false
+        if (playedNormal != song.playedNormal) return false
+        if (tuning != song.tuning) return false
+        if (year != song.year) return false
+
+        return true
+    }
+
+    int hashCode() {
+        int result
+        result = name.hashCode()
+        result = 31 * result + playedNormal.hashCode()
+        result = 31 * result + playedArcade.hashCode()
+        result = 31 * result + (year != null ? year.hashCode() : 0)
+        return result
+    }
 }
