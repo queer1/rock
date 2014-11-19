@@ -39,4 +39,17 @@ class Person {
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
+
+	@Override
+	public String toString() {
+		return "Person{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", enabled=" + enabled +
+				", accountExpired=" + accountExpired +
+				", accountLocked=" + accountLocked +
+				", passwordExpired=" + passwordExpired +
+				'}';
+	}
 }

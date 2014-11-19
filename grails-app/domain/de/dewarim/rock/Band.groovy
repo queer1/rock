@@ -23,4 +23,12 @@ class Band {
     int hashCode() {
         return name.hashCode()
     }
+
+    @Override
+    public String toString() {
+        return "Band{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
