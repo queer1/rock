@@ -42,11 +42,9 @@ class Score {
         int result
         result = (points != null ? points.hashCode() : 0)
         result = 31 * result + (ranking != null ? ranking.hashCode() : 0)
-        result = 31 * result + dateCreated.hashCode()
         result = 31 * result + (longestStreak != null ? longestStreak.hashCode() : 0)
         result = 31 * result + (precisionTimesTen != null ? precisionTimesTen.hashCode() : 0)
         result = 31 * result + (abilityTimesTen != null ? abilityTimesTen.hashCode() : 0)
-        result = 31 * result + scoreType.hashCode()
         return result
     }
 
