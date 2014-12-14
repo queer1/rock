@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list score">
 			
+				<g:if test="${scoreInstance?.abilityTimesTen}">
+				<li class="fieldcontain">
+					<span id="abilityTimesTen-label" class="property-label"><g:message code="score.abilityTimesTen.label" default="Ability Times Ten" /></span>
+					
+						<span class="property-value" aria-labelledby="abilityTimesTen-label"><g:fieldValue bean="${scoreInstance}" field="abilityTimesTen"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${scoreInstance?.dateCreated}">
 				<li class="fieldcontain">
 					<span id="dateCreated-label" class="property-label"><g:message code="score.dateCreated.label" default="Date Created" /></span>
@@ -32,11 +41,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${scoreInstance?.instrumentType}">
+				<li class="fieldcontain">
+					<span id="instrumentType-label" class="property-label"><g:message code="score.instrumentType.label" default="Instrument Type" /></span>
+					
+						<span class="property-value" aria-labelledby="instrumentType-label"><g:fieldValue bean="${scoreInstance}" field="instrumentType"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${scoreInstance?.longestStreak}">
+				<li class="fieldcontain">
+					<span id="longestStreak-label" class="property-label"><g:message code="score.longestStreak.label" default="Longest Streak" /></span>
+					
+						<span class="property-value" aria-labelledby="longestStreak-label"><g:fieldValue bean="${scoreInstance}" field="longestStreak"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${scoreInstance?.person}">
 				<li class="fieldcontain">
 					<span id="person-label" class="property-label"><g:message code="score.person.label" default="Person" /></span>
 					
-						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${scoreInstance?.person?.id}">${scoreInstance?.person?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${scoreInstance?.person?.id}">${scoreInstance?.person?.username?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -50,11 +77,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${scoreInstance?.precisionTimesTen}">
+				<li class="fieldcontain">
+					<span id="precisionTimesTen-label" class="property-label"><g:message code="score.precisionTimesTen.label" default="Precision Times Ten" /></span>
+					
+						<span class="property-value" aria-labelledby="precisionTimesTen-label"><g:fieldValue bean="${scoreInstance}" field="precisionTimesTen"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${scoreInstance?.ranking}">
 				<li class="fieldcontain">
 					<span id="ranking-label" class="property-label"><g:message code="score.ranking.label" default="Ranking" /></span>
 					
 						<span class="property-value" aria-labelledby="ranking-label"><g:fieldValue bean="${scoreInstance}" field="ranking"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${scoreInstance?.scoreType}">
+				<li class="fieldcontain">
+					<span id="scoreType-label" class="property-label"><g:message code="score.scoreType.label" default="Score Type" /></span>
+					
+						<span class="property-value" aria-labelledby="scoreType-label"><g:fieldValue bean="${scoreInstance}" field="scoreType"/></span>
 					
 				</li>
 				</g:if>

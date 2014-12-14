@@ -25,7 +25,7 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:scoreInstance, action:'save']" >
+			<g:form controller="score" action="save" >
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>

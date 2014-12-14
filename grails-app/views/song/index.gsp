@@ -23,11 +23,14 @@
 			<table>
 			<thead>
 					<tr>
+
+						<g:sortableColumn property="name" title="${message(code: 'song.name.label', default: 'Name')}" />
+
+						<g:sortableColumn property="band.name" titleKey="song.band.label" />
+						<g:sortableColumn property="year" title="${message(code: 'song.year.label', default: 'Year')}" />
+
+						<th><g:message code="song.tuning.label" default="Tuning" /></th>
 					
-                        <g:sortableColumn property="name" title="${message(code: 'song.name.label', default: 'Name')}" />
-
-                        <g:sortableColumn property="band.name" titleKey="song.band.label" />
-
 						<g:sortableColumn property="playedArcade" title="${message(code: 'song.playedArcade.label', default: 'Played Arcade')}" />
 					
 						<g:sortableColumn property="playedNormal" title="${message(code: 'song.playedNormal.label', default: 'Played Normal')}" />
@@ -38,9 +41,13 @@
 				<g:each in="${songInstanceList}" status="i" var="songInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                        <td><g:link action="show" id="${songInstance.id}">${fieldValue(bean: songInstance, field: "name")}</g:link></td>
+						<td><g:link action="show" id="${songInstance.id}">${fieldValue(bean: songInstance, field: "name")}</g:link></td>
 
-                        <td><g:link action="show" controller="band" id="${songInstance.band.id}">${fieldValue(bean: songInstance, field: "band.name")}</g:link></td>
+						<td><g:link action="show" controller="band" id="${songInstance.band.id}">${fieldValue(bean: songInstance, field: "band.name")}</g:link></td>
+
+						<td>${songInstance?.year} </td>
+					
+						<td>${fieldValue(bean: songInstance, field: "tuning")}</td>
 
 						<td>${fieldValue(bean: songInstance, field: "playedArcade")}</td>
 					

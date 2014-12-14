@@ -2,12 +2,30 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: songInstance, field: 'year', 'error')} ">
+	<label for="year">
+		<g:message code="song.year.label" default="Year" />
+		
+	</label>
+	<g:field name="year" type="number" value="${songInstance.year}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: songInstance, field: 'tuning', 'error')} ">
+	<label for="tuning">
+		<g:message code="song.tuning.label" default="Tuning" />
+		
+	</label>
+	<g:select id="tuning" name="tuning.id" from="${de.dewarim.rock.Tuning.list()}" optionValue="name" optionKey="id" value="${songInstance?.tuning?.id}" class="many-to-one" noSelection="['null': '']"/>
+
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: songInstance, field: 'band', 'error')} required">
 	<label for="band">
 		<g:message code="song.band.label" default="Band" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="band" name="band.id" from="${de.dewarim.rock.Band.list()}" optionKey="id" required="" value="${songInstance?.band?.id}" class="many-to-one"/>
+	<g:select id="band" name="band.id" from="${de.dewarim.rock.Band.list()}" optionValue="name" optionKey="id" required="" value="${songInstance?.band?.id}" class="many-to-one"/>
 
 </div>
 
@@ -37,21 +55,6 @@
 	<g:field name="playedNormal" type="number" value="${songInstance.playedNormal}" required=""/>
 
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: songInstance, field: 'scores', 'error')} ">
-	<label for="scores">
-		<g:message code="song.scores.label" default="Scores" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${songInstance?.scores?}" var="s">
-    <li><g:link controller="score" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="score" action="create" params="['song.id': songInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'score.label', default: 'Score')])}</g:link>
-</li>
-</ul>
 
 
 </div>

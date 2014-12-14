@@ -23,33 +23,49 @@
 			<table>
 			<thead>
 					<tr>
+
+						<th><g:message code="score.song.label" default="Song" /></th>
+
+						<g:sortableColumn property="abilityTimesTen" title="${message(code: 'score.abilityTimesTen.label', default: 'Ability')}" />
 					
 						<g:sortableColumn property="dateCreated" title="${message(code: 'score.dateCreated.label', default: 'Date Created')}" />
+					
+						<g:sortableColumn property="instrumentType" title="${message(code: 'score.instrumentType.label', default: 'Instrument Type')}" />
+					
+						<g:sortableColumn property="longestStreak" title="${message(code: 'score.longestStreak.label', default: 'Longest Streak')}" />
 					
 						<th><g:message code="score.person.label" default="Person" /></th>
 					
 						<g:sortableColumn property="points" title="${message(code: 'score.points.label', default: 'Points')}" />
 					
 						<g:sortableColumn property="ranking" title="${message(code: 'score.ranking.label', default: 'Ranking')}" />
-					
-						<th><g:message code="score.song.label" default="Song" /></th>
-					
+
+
+
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${scoreInstanceList}" status="i" var="scoreInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+						<td></td>
+
+						<td><g:link action="show" id="${scoreInstance.id}">${fieldValue(bean: scoreInstance, field: "song.name")}</g:link></td>
+
+						<td><g:formatNumber maxFractionDigits="2" number="${scoreInstance?.abilityTimesTen ? scoreInstance.abilityTimesTen / 10 : 0}"/></td>
+
+						<td><g:formatDate date="${scoreInstance.dateCreated}" /></td>
 					
-						<td><g:link action="show" id="${scoreInstance.id}">${fieldValue(bean: scoreInstance, field: "dateCreated")}</g:link></td>
+						<td>${fieldValue(bean: scoreInstance, field: "instrumentType")}</td>
 					
-						<td>${fieldValue(bean: scoreInstance, field: "person")}</td>
+						<td>${fieldValue(bean: scoreInstance, field: "longestStreak")}</td>
+					
+						<td>${fieldValue(bean: scoreInstance, field: "person.username")}</td>
 					
 						<td>${fieldValue(bean: scoreInstance, field: "points")}</td>
-					
+
 						<td>${fieldValue(bean: scoreInstance, field: "ranking")}</td>
-					
-						<td>${fieldValue(bean: scoreInstance, field: "song")}</td>
-					
+
 					</tr>
 				</g:each>
 				</tbody>

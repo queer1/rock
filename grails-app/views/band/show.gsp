@@ -32,22 +32,22 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${bandInstance?.songs}">
 				<li class="fieldcontain">
 					<span id="songs-label" class="property-label"><g:message code="band.songs.label" default="Songs" /></span>
 					
 						<g:each in="${bandInstance.songs}" var="s">
-						<span class="property-value" aria-labelledby="songs-label"><g:link controller="song" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="songs-label"><g:link controller="song" action="show" id="${s.id}">${s?.name}</g:link></span>
 						</g:each>
-					
+
 				</li>
-				</g:if>
-			
+
 			</ol>
 			<g:form url="[resource:bandInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${bandInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:link controller="song" action="create" params="['band.id': bandInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'song.label', default: 'Song')])}</g:link>
+
 				</fieldset>
 			</g:form>
 		</div>
