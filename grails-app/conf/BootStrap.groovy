@@ -1,3 +1,4 @@
+import com.google.common.primitives.Ints
 import de.dewarim.rock.Authority
 import de.dewarim.rock.Band
 import de.dewarim.rock.Person
@@ -28,33 +29,39 @@ class BootStrap {
 
         // import song lists
         Song.withTransaction {
-            def rocksmith1 = new File('data/rocksmith-tracklist.csv').eachCsvLine { line ->
-                def songName = (String) line[0]
-                def bandName = (String) line[1]
-                def songYear = line[2] == null ? null : Integer.parseInt(line[2])
 
-                Tuning tuning = null;
-                if(line.length > 3){
-                    def originalTuning = (String) line[3]
-                    tuning = Tuning.findByName(originalTuning)
-                }
+            def dataFiles = ['data/rocksmith-tracklist.csv', 'data/rocksmith-dlc.csv', 'data/rocksmith-2014-tracklist.csv']
 
-                def band = Band.findByName(bandName)
-                if (!band) {
-                    band = new
-                            Band(name: bandName)
-                    band.save()
+            dataFiles.each {        filename ->
+                new File(filename).eachCsvLine { line ->
+                    if(line.length < 3){ // we need at least 3 columns
+                        return
+                    }
+                    def songName = (String) line[0]
+                    def bandName = (String) line[1]
+                    def songYear = Ints.tryParse(line[2])
+
+                    Tuning tuning = null;
+                    if (line.length > 3) {
+                        def originalTuning = (String) line[3]
+                        tuning = Tuning.findByName(originalTuning)
+                    }
+
+                    def band = Band.findByName(bandName)
+                    if (!band) {
+                        band = new Band(name: bandName)
+                        band.save()
+                    }
+                    def song = Song.findByName(songName)
+                    if (song) {
+                        log.debug("Song $songName already exists. Skipping.")
+                        return
+                    }
+                    song = new Song(name: songName, year: songYear, band: band, tuning: tuning)
+                    song.save()
+                    log.debug("Imported song " + song)
                 }
-                def song = Song.findByName(songName)
-                if (song) {
-                    log.debug("Song $songName already exists. Skipping.")
-                    return
-                }
-                song = new Song(name: songName, year: songYear, band: band, tuning: tuning)
-                song.save()
-                log.debug("Imported song "+song)
             }
-
         }
 
         log.debug("Available songs: "+Song.count())
