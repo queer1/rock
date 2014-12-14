@@ -15,6 +15,9 @@
     <li>
         <g:link controller="score" action="index"><g:message code="link.to.scores"/> </g:link>
     </li>
+    <li>
+        <g:link controller="tuning" action="index"><g:message code="link.to.tunings"/> </g:link>
+    </li>
 </ul>
 <body>
 
