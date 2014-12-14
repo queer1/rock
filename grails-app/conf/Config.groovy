@@ -120,7 +120,7 @@ log4j.main = {
             'grails.spring.BeanBuilder',
             'grails.plugin.webxml',
             'grails.plugin.cache',
-            'grails.plugin.springsecurity.web.filter.GrailsAnonymousAuthenticationFilter'
+            'grails.plugin.springsecurity.web.filter'
 
     root{
         debug 'stdout'
