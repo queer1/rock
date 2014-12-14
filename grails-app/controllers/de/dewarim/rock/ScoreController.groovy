@@ -9,6 +9,8 @@ import grails.transaction.Transactional
 @Secured(['ROLE_USER'])
 class ScoreController {
 
+    def springSecurityService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -25,13 +27,17 @@ class ScoreController {
     }
 
     @Transactional
+    @Secured(['ROLE_USER'])
     def save(Score scoreInstance) {
         if (scoreInstance == null) {
             notFound()
             return
         }
+        scoreInstance.person = (Person) springSecurityService.getCurrentUser()
+        log.debug("Current user: ${scoreInstance.person}")
 
-        if (scoreInstance.hasErrors()) {
+        if (!scoreInstance.validate() && scoreInstance.hasErrors()) {
+
             respond scoreInstance.errors, view:'create'
             return
         }
