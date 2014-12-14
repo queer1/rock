@@ -45,6 +45,10 @@ class BootStrap {
                     if (line.length > 3) {
                         def originalTuning = (String) line[3]
                         tuning = Tuning.findByName(originalTuning)
+                        if(tuning == null){
+                            tuning = new Tuning(name: originalTuning)
+                            tuning.save()
+                        }
                     }
 
                     def band = Band.findByName(bandName)
