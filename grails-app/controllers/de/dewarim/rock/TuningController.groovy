@@ -6,25 +6,28 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_USER'])
 class TuningController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_USER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Tuning.list(params), model:[tuningInstanceCount: Tuning.count()]
     }
 
+    @Secured(['ROLE_USER'])
     def show(Tuning tuningInstance) {
         respond tuningInstance
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         respond new Tuning(params)
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def save(Tuning tuningInstance) {
         if (tuningInstance == null) {
             notFound()
@@ -47,11 +50,13 @@ class TuningController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Tuning tuningInstance) {
         respond tuningInstance
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def update(Tuning tuningInstance) {
         if (tuningInstance == null) {
             notFound()
@@ -75,6 +80,7 @@ class TuningController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(Tuning tuningInstance) {
 
         if (tuningInstance == null) {
