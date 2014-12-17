@@ -33,6 +33,10 @@ class ScoreController {
             notFound()
             return
         }
+        if(scoreInstance.id){
+            // to prevent someone from changing an existing entry via creating another with the same id
+            return
+        }
         scoreInstance.person = (Person) springSecurityService.getCurrentUser()
         log.debug("Current user: ${scoreInstance.person}")
 
@@ -53,11 +57,13 @@ class ScoreController {
         }
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Score scoreInstance) {
         respond scoreInstance
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def update(Score scoreInstance) {
         if (scoreInstance == null) {
             notFound()
@@ -81,12 +87,19 @@ class ScoreController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(Score scoreInstance) {
 
         if (scoreInstance == null) {
             notFound()
             return
         }
+        // TODO: implement ticket #18
+//        def person = (Person) springSecurityService.getCurrentUser()
+//        if(scoreInstance.person != person){
+//            TODO: add error message
+//            return
+//        }
 
         scoreInstance.delete flush:true
 

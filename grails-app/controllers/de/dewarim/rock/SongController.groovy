@@ -81,6 +81,7 @@ class SongController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(Song songInstance) {
 
         if (songInstance == null) {

@@ -10,13 +10,13 @@ class TuningController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    @Secured(['ROLE_USER'])
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Tuning.list(params), model:[tuningInstanceCount: Tuning.count()]
     }
 
-    @Secured(['ROLE_USER'])
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def show(Tuning tuningInstance) {
         respond tuningInstance
     }

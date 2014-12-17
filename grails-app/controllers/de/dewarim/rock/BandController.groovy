@@ -56,6 +56,7 @@ class BandController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def update(Band bandInstance) {
         if (bandInstance == null) {
             notFound()
